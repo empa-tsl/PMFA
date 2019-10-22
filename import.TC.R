@@ -3,7 +3,7 @@
 # above 1.
 # 
 # Author: Delphine Kawecki-Wenger
-# Date of last modification: 16.10.2019
+# Date of last modification: 22.10.2019
 
 # function to import data stored in Excel for transfer coefficients
 import.TC <- function(Coeff,
@@ -33,14 +33,14 @@ import.TC <- function(Coeff,
         colnames(datapoints) <- c("From", "To", "Data", "Spread")
       }
       
-      if(any(is.na(datapoints))){
-        stop(paste("The flow from", comp, "to", dest, "is ill-defined."))
-      }
-      
       # for compartments where the flow is defined as the rest, fill with NA data and move on to next iteration
       if(any(datapoints[,"Data"] == "rest")){
         TC[[comp]][[dest]] <- rep("rest",SIM)
         next
+      }
+      
+      if(any(is.na(datapoints))){
+        stop(paste("The flow from", comp, "to", dest, "is ill-defined."))
       }
       
       

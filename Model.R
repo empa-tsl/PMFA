@@ -3,7 +3,7 @@
 # The current directory should be adapted.
 # 
 # Author: Delphine Kawecki-Wenger
-# Date of last modification: 16.10.2019
+# Date of last modification: 22.10.2019
 
 # set the working directory for the calculation
 setwd("SET/WORKING/DIRECTORY")
@@ -11,7 +11,6 @@ setwd("SET/WORKING/DIRECTORY")
 # load the functions required to run this code
 source("rtriang.perc.R")
 source("rtrapez.perc.R")
-source("import.input.R")
 source("import.input.R")
 source("import.TC.R")
 source("calc.rest.TC.R")
@@ -24,14 +23,14 @@ library(xlsx)
 SIM <- 100
 
 # import the initial data
-Input.data <- as.matrix(read.xlsx("Feed.xlsx", sheetName = "Input"))
-Coeff.data <- as.matrix(read.xlsx("Feed.xlsx", sheetName = "TC"))
+Input.data <- as.matrix(read.xlsx("../191022_Debug_Yuanfang/Feed.xlsx", sheetName = "Input"))
+Coeff.data <- as.matrix(read.xlsx("../191022_Debug_Yuanfang/Feed.xlsx", sheetName = "TC"))
 
 # find all the compartment names
-Names <- unique(c(Coeff.data[-1,c(1,2)]))
+Names <- unique(c(Coeff.data[,c(1,2)]))
 
 # import the input data (THE UNIT NEEDS TO ALWAYS BE THE SAME)
-Input <- import.input(Input.data, Names, SIM)
+Input <- import.input(Input.data, SIM)
 
 # import the TC values
 TC <- import.TC(Coeff.data, Names)

@@ -2,14 +2,14 @@
 # on the input data provided
 # 
 # Author: Delphine Kawecki-Wenger
-# Date of last modification: 16.10.2019
+# Date of last modification: 22.10.2019
 
 import.input <- function(data,
-                         Names,
-                         SIM, linf = 0){
+                         SIM,
+                         linf = 0){
   
   # create empty lists
-  Input <- sapply(Names, function(x) NULL)
+  Input <- list()
   
   # take appropriate data for the system
   data <- data[, c("Compartment", "Data", "Spread")]

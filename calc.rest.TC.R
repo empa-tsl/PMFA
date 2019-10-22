@@ -2,12 +2,17 @@
 # for transfer coefficients defined as the remaining fraction.
 # 
 # Author: Delphine Kawecki-Wenger
-# Date of last modification: 16.10.2019
+# Date of last modification: 22.10.2019
 
 calc.rest.TC <- function(TC){
   
   # for compartments where the flow is defined as the rest, take the rest
   for(comp in 1:length(TC)){
+    
+    # skip if no flows defined for comp
+    if(is.null(TC[[comp]])){
+      next
+    }
     
     # find the destination compartment that is a 'rest' flow
     restcomp <- which(sapply(TC[[comp]], function(x) any(x == "rest")))
@@ -18,11 +23,12 @@ calc.rest.TC <- function(TC){
       
       # if there is no rest flow, go next
     } else if(length(restcomp) == 0){
-      return(TC)
+      next
     }
     
     # if one flow is undefined, do nothing
     if(any(sapply(TC[[comp]], function(x) any(is.na(x))))){
+      warning(paste0("There is missing flow data for a flow from compartment '", names(TC)[comp],"'."))
       next
     }
     
@@ -31,7 +37,10 @@ calc.rest.TC <- function(TC){
     otherflows[[restcomp]] <- NULL
     
     # in case more than one other flow, sum them up
-    otherflows <- apply(do.call(cbind, otherflows), 1, sum)
+    if(is.list(otherflows)){
+      otherflows <- apply(do.call(cbind, otherflows), 1, sum)  
+    }
+    
     if(any(otherflows > 1)){
       message( "WARNING: Sum of outflows from ",
                names(TC)[comp],
