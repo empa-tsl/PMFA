@@ -16,3 +16,5 @@ The following functions for the calculation of flows are part of this package:
 The following two functions can be used to analyze the data
 - find.fc: function that calculates what fraction of the mass of one compartment finishes in the final sinks (or whichever compartments are chosen to stop at). Useful for calculating how much of a product in use is finally recycled or ending up in the environment.
 - sci.not: function that displays a probability distribution as MEAN +/- STANDARD DEVIATION. The standard deviation is rounded to two digits and the mean is rounded to the precision of the standard deviation. Please note that significant zeros could not be displayed in this version, so pay attention to the number of significant digits of the standard deviation, and from there, of the mean, if you would like to display the "significant zeros".
+
+For a first test, we recommend running Model.R and starting the modifications from there. This script uses the above mentioned functions along with the Feed.xlsx input table.
