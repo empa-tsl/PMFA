@@ -23,8 +23,8 @@ library(xlsx)
 SIM <- 100
 
 # import the initial data
-Input.data <- as.matrix(read.xlsx("../191022_Debug_Yuanfang/Feed.xlsx", sheetName = "Input"))
-Coeff.data <- as.matrix(read.xlsx("../191022_Debug_Yuanfang/Feed.xlsx", sheetName = "TC"))
+Input.data <- as.matrix(read.xlsx("Feed.xlsx", sheetName = "Input"))
+Coeff.data <- as.matrix(read.xlsx("Feed.xlsx", sheetName = "TC"))
 
 # find all the compartment names
 Names <- unique(c(Coeff.data[,c(1,2)]))
